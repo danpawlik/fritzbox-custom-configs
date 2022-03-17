@@ -13,6 +13,9 @@ RUN dnf -y install pv rsync kmod execstack sqlite.i686 sqlite-devel \
       wget glib2-devel git libacl-devel libattr-devel libcap-devel \
       ncurses-devel.i686 glibc-devel.i686 libgcc.i686
 
+RUN if ! [ -f /usr/bin/python ]; then ln -s /usr/bin/python3 /usr/bin/python ; fi
+RUN dnf clean all
+
 RUN useradd -m user && \
     echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
 
